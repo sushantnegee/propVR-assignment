@@ -1,5 +1,6 @@
 const Project = require('../models/projectModel')
 
+// create project---------------->>
 const createProject = async (req,res)=>{
     try {
         const { name, description, dueDate, owner, team, tasks } = req.body;
@@ -22,4 +23,16 @@ const createProject = async (req,res)=>{
     }
 }
 
-module.exports = {createProject}
+
+//  method for get all projects ---------------->>
+const getProjects = async (req,res)=>{
+    try {
+        const projects = await Project.find().populate("owner team"); // get all data and populate where necessary
+        res.status(200).json(projects)
+
+    } catch (error) {
+        console.log("error get Project :=>",error.message)
+        res.status(500).json({message:"Server Error"})
+    }
+}
+module.exports = {createProject,getProjects}
