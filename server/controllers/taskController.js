@@ -1,6 +1,6 @@
 const Task = require('../models/taskmodel')
 
-//create all task
+//create all task  ----->
 const createTask =async (req,res)=>{
     try {
         const { title, project } = req.body;
@@ -15,7 +15,7 @@ const createTask =async (req,res)=>{
       }
 }
 
-//get all tasks
+//get all tasks ------>
 const getTasks = async (req, res) => {
     try {
       const tasks = await Task.find();
@@ -25,4 +25,18 @@ const getTasks = async (req, res) => {
     }
   };
 
-module.exports = {createTask,getTasks}
+
+  // get task by id ---->
+  const getTaskById = async (req, res) => {
+    try {
+      const task = await Task.findById(req.params.id);
+      if (!task) {
+        return res.status(404).json({ message: "Task not found" });
+      }
+      res.send(task);
+    } catch (error) {
+      res.status(500).send(error.message);
+    }
+  };
+
+module.exports = {createTask, getTasks, getTaskById}
