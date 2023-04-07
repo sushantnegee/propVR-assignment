@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const registerUser = async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password,image } = req.body;
   const user = await User.findOne({ email });
 
   if (user) {
@@ -16,7 +16,9 @@ const registerUser = async (req, res) => {
   const newUser = await User.create({
     name,
     email,
+    image,
     password: hashedPassword,
+    
   });
 
   if (newUser) {
@@ -27,7 +29,7 @@ const registerUser = async (req, res) => {
       _id: newUser._id,
       name: newUser.name,
       email: newUser.email,
-      pic: newUser.pic,
+      image: newUser.image,
       token: token,
     });
   } else {
@@ -57,6 +59,7 @@ try {
         _id: user._id,
         name: user.name,
         email: user.email,
+        image:user.image,
         token: token, 
       });
 
