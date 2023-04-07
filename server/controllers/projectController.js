@@ -36,6 +36,22 @@ const getProjects = async (req, res) => {
   }
 };
 
+//get project by id
+const getProjectById = async (req,res)=>{
+    try {
+        const {id} = req.params;
+    const project = await Project.findById(id).populate("owner team") // need to populate task
+
+    if(!project ){
+        return res.status(404).json({ message: 'Project not found' });
+    }
+    res.status(200).json(project);
+    } catch (error) {
+        console.error("error get project by id =>",error);
+    res.status(500).json({ message: 'Server Error' });
+    }
+}
+
 // update project by id
 const updateProject = async (req, res) => {
   try {
@@ -56,4 +72,4 @@ const updateProject = async (req, res) => {
     res.status(500).json({ message: "Server Error" });
   }
 };
-module.exports = { createProject, getProjects,updateProject };
+module.exports = { createProject, getProjects,getProjectById,updateProject };
