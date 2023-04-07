@@ -9,6 +9,7 @@ app.use(cors())
 
 dotenv.config();
 app.use(express.json());
+
 app.use('/user',userRoutes);
 
 connectDataBase();
