@@ -41,7 +41,7 @@ const ProjectPage = () => {
 
   useEffect(() => {
     fetchProjects();
-  }, []);
+  }, [user]);
   return (
     // <Container>
     <Box w={"90%"} margin={"0 auto"} border="2px solid red">
@@ -62,7 +62,9 @@ const ProjectPage = () => {
             </Thead>
             <Tbody>
               {projectData.map((elem,i)=>{
-                return <ProjectTableBody data={elem} key={elem._id}/>
+                if(elem.owner._id==user._id ||  elem.team.some(obj => obj._id === user._id)){
+                  return <ProjectTableBody data={elem} key={elem._id}/>
+                }
               })
               }
               </Tbody>

@@ -8,7 +8,7 @@ import {
   VStack,
   useToast,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { BiHide, BiShow } from "react-icons/bi";
 import axios from "axios";
 import "./Auth.css";
@@ -16,6 +16,7 @@ import { API_LINK } from "../../Config/Api";
 import Action from "../../Redux/Action";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { AppContext } from "../../ContextApi/ContextProvider";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
@@ -24,6 +25,7 @@ const Login = () => {
   const [show, setShow] = useState();
   const toast = useToast();
 
+  const {setUser,setLoggedIn} = useContext(AppContext)
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -58,9 +60,12 @@ const Login = () => {
         position: "bottom",
       });
       // Action(data, dispatch)
+      setUser(data);  
       localStorage.setItem("userDetails",JSON.stringify(data));
       setLoading(false);
+      setLoggedIn(true);
       navigate('/projects')
+      
       
     } catch (error) {
       setLoading(false);
