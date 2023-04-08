@@ -18,7 +18,7 @@ const createTask =async (req,res)=>{
 //get all tasks ------>
 const getTasks = async (req, res) => {
     try {
-      const tasks = await Task.find();
+      const tasks = await Task.find().populate("project assignedTo");
       res.send(tasks);
     } catch (error) {
       res.status(500).send(error.message);
@@ -29,7 +29,7 @@ const getTasks = async (req, res) => {
   // get task by id ---->
   const getTaskById = async (req, res) => {
     try {
-      const task = await Task.findById(req.params.id);
+      const task = await Task.findById(req.params.id).populate("project assignedTo");
       if (!task) {
         return res.status(404).json({ message: "Task not found" });
       }
@@ -39,4 +39,32 @@ const getTasks = async (req, res) => {
     }
   };
 
-module.exports = {createTask, getTasks, getTaskById}
+  //update task by id
+  const updateTaksById = async (req, res) => {
+    try {
+        const {id} = req.params
+      const task = await Task.findByIdAndUpdate(id, req.body, { new: true }).populate("project assignedTo");
+      res.send(task);
+    } catch (error) {
+      console.error(error);
+      console.log('error updateTaskById =>',error.message)
+      res.status(500).send(error.message);
+    }
+  }
+
+  //delete a task
+  const deleteById = async (req, res) => {
+    try {
+        const {id} = req.params
+      const task = await Task.findByIdAndDelete(id).populate("project assignedTo");
+      if (!task) {
+        return res.status(404).json({ message: "Task not found" })
+      }
+    //   res.send(task);
+    res.status(200).json({ message: "Task deleted successfully" });
+    } catch (error) {
+      res.status(500).send(error.message);
+    }
+  }
+
+module.exports = {createTask, getTasks, getTaskById, deleteById, updateTaksById}

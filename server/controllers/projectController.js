@@ -28,7 +28,7 @@ const createProject = async (req, res) => {
 // get all projects ---------------->>
 const getProjects = async (req, res) => {
   try {
-    const projects = await Project.find().populate("owner team"); // get all data and populate where necessary :: need to add task in populate
+    const projects = await Project.find().populate("owner team tasks"); // get all data and populate where necessary :: need to add task in populate
     res.status(200).json(projects);
   } catch (error) {
     console.log("error get Project :=>", error.message);
@@ -40,7 +40,7 @@ const getProjects = async (req, res) => {
 const getProjectById = async (req, res) => {
   try {
     const { id } = req.params;
-    const project = await Project.findById(id).populate("owner team"); // need to populate task
+    const project = await Project.findById(id).populate("owner team tasks"); // need to populate tasks
 
     if (!project) {
       return res.status(404).json({ message: "Project not found" });
@@ -77,7 +77,7 @@ const updateProject = async (req, res) => {
 const deleteProject = async (req, res) => {
   try {
     const { id } = req.params;
-    const project = await Project.findByIdAndDelete(id).populate("owner team"); //need to populate tasks
+    const project = await Project.findByIdAndDelete(id).populate("owner team tasks"); //need to populate tasks
     if (!project) {
       return res.status(404).json({ message: "Project not found" });
     }
