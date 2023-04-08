@@ -23,7 +23,7 @@ import CreateProjectModal from "../Components/Modals/CreateProjectModal";
 
 const ProjectPage = () => {
   const [projectData,SetProjectData] = useState([]);
-  const { user } = useContext(AppContext);
+  const { user,fetchAgain } = useContext(AppContext);
   const fetchProjects = async () => {
     try {
       const config = {
@@ -43,7 +43,7 @@ const ProjectPage = () => {
 
   useEffect(() => {
     fetchProjects();
-  }, [user]);
+  }, [user,fetchAgain]);
   return (
     // <Container>
     <Box w={"90%"} margin={"0 auto"} border="2px solid red">
@@ -67,7 +67,10 @@ const ProjectPage = () => {
             </Thead>
             <Tbody>
               {projectData.map((elem,i)=>{
-                if(elem.owner._id==user._id ||  elem.team.some(obj => obj._id === user._id)){
+                console.log("elem", elem);
+                console.log("user", user);
+                console.log("elem.owner", elem.owner);
+                if(elem.owner._id && user._id && elem.owner._id==user?._id ||  elem.team.some(obj => obj._id === user?._id)){
                   return <ProjectTableBody data={elem} key={elem._id}/>
                 }
               })
