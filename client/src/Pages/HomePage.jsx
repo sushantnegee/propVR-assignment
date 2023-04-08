@@ -6,25 +6,44 @@ import {
   TabPanel,
   TabPanels,
   Tabs,
+  Text,
 } from "@chakra-ui/react";
 import React from "react";
 import Login from "../Components/Authentication/Login";
 import Signup from "../Components/Authentication/Signup";
-import backroundImage from '../Components/Images/teamWork.jpg'
 
 const HomePage = () => {
   return (
-    <Container centerContent>
+    <Container maxW={'xl'} centerContent>
+      <Box
+        display={'flex'}
+        justifyContent={'center'}
+        padding={3}
+        backgroundColor={"white"}
+        width={'100%'}
+        margin={'70px 0px 15px 0px'}
+        borderRadius={'lg'}
+        borderWidth={'1px'}
+      >
+        <Text
+          textAlign={"center"}
+          fontSize={"4xl"}
+          // fontFamily={"Work sans"} 
+          color={"black"}
+        >
+          Team Management App
+        </Text>
+      </Box>
       <Box
         padding={3}
         width={"100%"}
-        m={"90px 0px 80px 0px"}
+        m={"0px 0px 80px 0px"}
         p={4}
         borderRadius={"lg"}
         borderWidth={"1px"}
         
       >
-        <Tabs variant="soft-rounded" colorScheme="orange">
+        <Tabs variant="soft-rounded" colorScheme="blue">
           <TabList>
             <Tab w={"50%"}>Login</Tab>
             <Tab w={"50%"}>Signup</Tab>
