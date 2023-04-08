@@ -8,13 +8,16 @@ import {
   Td,
   Tr,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useContext } from "react";
 import { AiOutlineStar } from "react-icons/ai";
 import { BsThreeDots } from "react-icons/bs";
 import { GrFormDown } from "react-icons/gr";
+import CreateTaskModal from "../Modals/CreateTaskModal";
+import { AppContext } from "../../ContextApi/ContextProvider";
 
 const ProjectTableBody = ({ data }) => {
   const { name, owner, startDate, dueDate } = data;
+  const {setSelectedProject} = useContext(AppContext)
   return (
     <Tr>
       <Td>
@@ -37,7 +40,9 @@ const ProjectTableBody = ({ data }) => {
           </MenuButton>
           <MenuList>
             <MenuItem>Edit Project</MenuItem>
-            <MenuItem>Create Task</MenuItem>
+            <CreateTaskModal>
+            <MenuItem onClick={()=>setSelectedProject(data)}>Create Task</MenuItem>
+            </CreateTaskModal>
             <MenuItem>Add User</MenuItem>
           </MenuList>
         </Menu>

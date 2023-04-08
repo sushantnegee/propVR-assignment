@@ -60,7 +60,7 @@ const Login = () => {
         position: "bottom",
       });
       // Action(data, dispatch)
-      setUser(data);  
+      setUser(data);
       localStorage.setItem("userDetails",JSON.stringify(data));
       setLoading(false);
       setLoggedIn(true);

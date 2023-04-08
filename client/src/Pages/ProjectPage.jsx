@@ -1,6 +1,7 @@
 import {
   Avatar,
   Box,
+  Button,
   Container,
   Table,
   TableCaption,
@@ -18,6 +19,7 @@ import { AppContext } from "../ContextApi/ContextProvider";
 import { API_LINK } from "../Config/Api";
 import axios from "axios";
 import ProjectTableBody from "../Components/Project/ProjectTableBody";
+import CreateProjectModal from "../Components/Modals/CreateProjectModal";
 
 const ProjectPage = () => {
   const [projectData,SetProjectData] = useState([]);
@@ -45,6 +47,9 @@ const ProjectPage = () => {
   return (
     // <Container>
     <Box w={"90%"} margin={"0 auto"} border="2px solid red">
+      <CreateProjectModal>
+      <Button>Create Project</Button>
+      </CreateProjectModal>
       <Box w={"90%"} margin={"40px auto"}>
         <TableContainer width={"100%"}>
           <Table variant="simple">

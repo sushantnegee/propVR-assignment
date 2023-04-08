@@ -6,6 +6,8 @@ export const AppContext = createContext();
 const ContextProvider = ({children}) => {
     const [user,setUser] = useState();
     const [loggedIn,setLoggedIn] = useState(false);
+    const [fetchAgain,setFetchAgain] = useState(false);
+    const [selectedProject,setSelectedProject] = useState();
     // let userData = useSelector((storeData) => {
     //     return storeData.userDetails;
     // })
@@ -24,7 +26,11 @@ const ContextProvider = ({children}) => {
         user,
         setUser,
         loggedIn,
-        setLoggedIn
+        setLoggedIn,
+        fetchAgain,
+        setFetchAgain,
+        selectedProject,
+        setSelectedProject
     }}>
         {children}
     </AppContext.Provider>
