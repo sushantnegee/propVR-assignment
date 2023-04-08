@@ -1,4 +1,4 @@
-const User = require("../models/userModels");
+const User = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -37,6 +37,8 @@ const registerUser = async (req, res) => {
   }
 };
 
+
+//login ----->
 const authUser = async(req,res)=>{
 const {email,password}  = req.body;
 try {
@@ -66,7 +68,19 @@ try {
 } catch (error) {
     res.status(500).json({ message: error.message });
 }
-
 }
 
-module.exports = { registerUser, authUser };
+// get all user
+const allUsers = asyncHandler(async(req,res)=>{
+  const keyword  = req.query.search ?{
+    $or:[
+      {name:{$regex: req.query.search, $options:"i"}},
+      {email:{$regex: req.query.search, $options:"i"}}
+    ]
+  }:{}
+
+  const users = await User.find(keyword).find({_id:{$ne:req.user._id}});
+  res.send(users);
+})
+
+module.exports = { registerUser, authUser, allUsers };

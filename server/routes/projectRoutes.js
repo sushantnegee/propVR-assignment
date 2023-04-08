@@ -1,21 +1,22 @@
 const express = require('express');
 const { createProject, getProjects, updateProject, getProjectById, deleteProject } = require('../controllers/projectController');
+const protect = require('../middlewares/authMiddleware');
 const router = express.Router();
 
 // create project
-router.post('/',createProject);
+router.post('/',protect,createProject);
 
 // Get all projects
-router.get('/', getProjects);
+router.get('/',protect, getProjects);
 
 // Get project by id
-router.get('/:id', getProjectById);
+router.get('/:id',protect, getProjectById);
 
 // Update project by id
-router.patch('/:id', updateProject);
+router.patch('/:id',protect, updateProject);
 
 // Delete project by id
-router.delete('/:id', deleteProject);
+router.delete('/:id',protect, deleteProject);
 
 module.exports = router
 
