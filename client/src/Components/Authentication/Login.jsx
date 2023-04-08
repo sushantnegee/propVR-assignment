@@ -57,7 +57,8 @@ const Login = () => {
         isClosable: true,
         position: "bottom",
       });
-      Action(data, dispatch)
+      // Action(data, dispatch)
+      localStorage.setItem("userDetails",JSON.stringify(data));
       setLoading(false);
       navigate('/projects')
       
