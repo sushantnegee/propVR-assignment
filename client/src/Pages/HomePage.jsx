@@ -10,17 +10,19 @@ import {
 import React from "react";
 import Login from "../Components/Authentication/Login";
 import Signup from "../Components/Authentication/Signup";
+import backroundImage from '../Components/Images/teamWork.jpg'
 
 const HomePage = () => {
   return (
-    <Container  maxW={"xl"} centerContent>
+    <Container centerContent>
       <Box
         padding={3}
         width={"100%"}
-        m={"50px 0px 80px 0px"}
+        m={"90px 0px 80px 0px"}
         p={4}
         borderRadius={"lg"}
         borderWidth={"1px"}
+        
       >
         <Tabs variant="soft-rounded" colorScheme="orange">
           <TabList>
