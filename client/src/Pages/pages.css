@@ -1,3 +1,14 @@
 .projectTableContainer::-webkit-scrollbar{
     display: none;
 }
+.noProjectImage{
+    height: 100%;
+    margin: auto;
+    /* overflow: hidden; */
+
+    /* border: 2px solid red; */
+}
+
+.LoadinGif{
+    max-width: 10%;
+}

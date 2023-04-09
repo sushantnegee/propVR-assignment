@@ -17,13 +17,17 @@ import axios from "axios";
 import ProjectTableBody from "../Components/Project/ProjectTableBody";
 import './pages.css'
 import ProjectHeader from "../Components/Project/ProjectHeader";
+import LoadingTable from "../Components/LoadingTable";
+import { BsThreeDots } from "react-icons/bs";
 
 
 const ProjectPage = () => {
   const [projectData, SetProjectData] = useState([]);
   const { user, fetchAgain } = useContext(AppContext);
+  const [loading,setLoading] = useState(false);
   
   const fetchProjects = async () => {
+    setLoading(true);
     try {
       const config = {
         headers: {
@@ -33,20 +37,37 @@ const ProjectPage = () => {
 
       const { data } = await axios.get(`${API_LINK}/projects/`, config);
       // console.log(data);
-      SetProjectData(data);
-      // console.log("fetched");
+      const filteredData = data.filter((elem)=>{
+        return (elem.owner._id && user._id && elem.owner._id == user?._id) ||
+                  elem.team.some((obj) => obj._id === user?._id)
+
+      })
+      SetProjectData(filteredData);
+      setTimeout(()=>{
+
+        setLoading(false)
+      },2000)
     } catch (error) {
       console.log("error ==>", error.message);
+      setLoading(false)
     }
   };
 
   useEffect(() => {
     fetchProjects();
   }, [user, fetchAgain]);
+  console.log(projectData)
   return (
       <Box w={"80%"}  borderLeft={"1px solid gray"}>
         <ProjectHeader/>
-        <TableContainer marginTop={'17px'} className="projectTableContainer" width={"100%"}  height={"86vh"} overflowY={'scroll'} borderTop={'1px solid lightgray'}>
+        {loading?<LoadingTable/>
+        // <Box  width={'100%'} display={'flex'} justifyContent={'center'} alignItems={'center'} height={'86vh'} borderTop={'1px solid lightgray'}>
+        // <img className="LoadinGif" src="https://thumbs.gfycat.com/RelievedSilentArcticwolf.webp" alt="Loading"/>
+        // </Box>
+        :projectData.length<=0?<Box  width={'100%'} height={'86vh'} borderTop={'1px solid lightgray'}>
+          <img className="noProjectImage" src="https://i.pinimg.com/originals/dd/59/ca/dd59cabdd357be5659fbac290414bb6a.jpg" alt="no project"/>
+          </Box>:
+        <TableContainer marginTop={'17px'} pl={10} pr={6} className="projectTableContainer" width={"100%"}  height={"86vh"} overflowY={'scroll'} borderTop={'1px solid lightgray'}>
           <Table variant="simple" >
             <Thead>
               <Tr>
@@ -57,24 +78,21 @@ const ProjectPage = () => {
                 <Th>Owner</Th>
                 <Th>Start Date</Th>
                 <Th>End Date</Th>
-                <Th>Add Project+</Th>
+                <Th><BsThreeDots size={"1.5rem"} /></Th>
               </Tr>
             </Thead>
+            
             <Tbody>
               {projectData.map((elem, i) => {
-                // console.log("elem", elem);
-                // console.log("user", user);
-                // console.log("elem.owner", elem.owner);
-                if (
-                  (elem.owner._id && user._id && elem.owner._id == user?._id) ||
-                  elem.team.some((obj) => obj._id === user?._id)
-                ) {
                   return <ProjectTableBody data={elem} key={elem._id} />;
-                }
+                // }
               })}
             </Tbody>
           </Table>
-        </TableContainer>
+        </TableContainer>}
+
+        
+            
       </Box>
     // </Container>
   );

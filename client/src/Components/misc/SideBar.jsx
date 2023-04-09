@@ -77,7 +77,7 @@ const SideBar = () => {
         border={'2px solid white'}
         color={"white"}
       >
-        <Avatar mr={2} size="md" cursor="pointer" name={user?.name} />
+        <Avatar mr={2} size="md" cursor="pointer" name={user?.name} src={user?.pic} />
         <Text>{user?.name}</Text>
       </Button>
           {/* <Avatar size="sm" cursor="pointer" name={user.name} src={user.pic} /> */}
