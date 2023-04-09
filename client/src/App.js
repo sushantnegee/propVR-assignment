@@ -3,13 +3,16 @@ import HomePage from './Pages/HomePage'
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import ProjectPage from './Pages/ProjectPage';
+import ProjectDescription from './Pages/ProjectDescription';
+import SideBarProvider from './Components/SideBarProvider';
 
 function App() {
   return (
     <div className="App">
       <Routes>
         <Route path={'/'} element={<HomePage/>}/>
-        <Route path={'/projects'} element={<ProjectPage/>}/>
+        <Route path={'/projects'} element={<SideBarProvider><ProjectPage/></SideBarProvider>}/>
+        <Route path={'/projects/:id'} element={<SideBarProvider><ProjectDescription/></SideBarProvider>}/>
       </Routes>
     </div>
   );

@@ -20,6 +20,7 @@ import SideBar from "../Components/misc/SideBar";
 const ProjectPage = () => {
   const [projectData, SetProjectData] = useState([]);
   const { user, fetchAgain } = useContext(AppContext);
+  
   const fetchProjects = async () => {
     try {
       const config = {
@@ -41,19 +42,7 @@ const ProjectPage = () => {
     fetchProjects();
   }, [user, fetchAgain]);
   return (
-    // <Container>
-    <Box
-      w={"100%"}
-      display={"flex"}
-      justifyContent={"center"}
-      alignContent={"center"}
-      margin={"0 auto"}
-      // border="2px solid red"
-    >
-      {/* <CreateProjectModal>
-      <Button>Create Project</Button>
-      </CreateProjectModal> */}
-      <SideBar/>
+   
       <Box w={"75%"} margin={"40px auto"}>
         <TableContainer width={"100%"}>
           <Table variant="simple">
@@ -85,7 +74,6 @@ const ProjectPage = () => {
           </Table>
         </TableContainer>
       </Box>
-    </Box>
     // </Container>
   );
 };

@@ -198,7 +198,7 @@ console.log(team)
             </FormControl>
             <FormControl>
               <Input
-                placeholder="Assign to eg: sushant etc"
+                placeholder="Add team members to eg: sushant etc"
                 mb="3"
                 onChange={(e) => {
                   handleSearch(e.target.value);

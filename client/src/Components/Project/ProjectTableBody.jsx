@@ -14,6 +14,9 @@ import { BsThreeDots } from "react-icons/bs";
 import { GrFormDown } from "react-icons/gr";
 import CreateTaskModal from "../Modals/CreateTaskModal";
 import { AppContext } from "../../ContextApi/ContextProvider";
+import EditProjectModal from "../Modals/EditProjectModal";
+import './Project.css'
+import { Link } from "react-router-dom";
 
 const ProjectTableBody = ({ data }) => {
   const { name, owner, startDate, dueDate } = data;
@@ -24,7 +27,7 @@ const ProjectTableBody = ({ data }) => {
       <Td>
         <AiOutlineStar size={"1.8rem"} color="gray" />
       </Td>
-      <Td>{name}</Td>
+      <Td onClick={setSelectedProject(data)} className="HoverUnderline"><Link to={`/projects/${data._id}`}>{name}</Link></Td>
       <Td>
         <Avatar
           name={owner.name}
@@ -40,7 +43,9 @@ const ProjectTableBody = ({ data }) => {
             <BsThreeDots size={"1.5rem"} />
           </MenuButton>
           <MenuList>
-            <MenuItem>Edit Project</MenuItem>
+            <EditProjectModal>
+            <MenuItem onClick={()=>setSelectedProject(data)}>Edit Project</MenuItem>
+            </EditProjectModal>
             <CreateTaskModal>
             <MenuItem onClick={()=>setSelectedProject(data)}>Create Task</MenuItem>
             </CreateTaskModal>
