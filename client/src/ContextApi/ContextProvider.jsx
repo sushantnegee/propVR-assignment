@@ -18,7 +18,7 @@ const ContextProvider = ({children}) => {
         // setUser(userData);
         let userDetails = JSON.parse(localStorage.getItem('userDetails'));
         setUser(userDetails);
-    },[loggedIn])
+    },[loggedIn,fetchAgain])
 
     // console.log('user Details ==>',user)
   return (

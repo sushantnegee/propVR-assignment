@@ -6,17 +6,23 @@ import {
   AccordionPanel,
   Box,
   Text,
+  useToast,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import TaskTable from "../Components/Tasks/TaskTable";
-import ProjectDescriptionHeader from "../Components/Project/ProjectDescriptionHeader";
+import ProjectDescriptionHeader from "../Components/ProjectDescription/ProjectDescriptionHeader";
+import { useParams } from "react-router-dom";
+import { AppContext } from "../ContextApi/ContextProvider";
+import axios from "axios";
+import { API_LINK } from "../Config/Api";
 
 const ProjectDescription = () => {
+  
   return (
-    <Box w={"75%"} margin={"40px auto"} border={"2px solid red"}>
+    <Box w={"80%"}  borderLeft={"1px solid lightgray"}>
       <ProjectDescriptionHeader />
 
-      <Accordion defaultIndex={[0]} allowToggle>
+      <Accordion defaultIndex={[0]} p={2} allowToggle>
         <AccordionItem>
           <h2>
             <AccordionButton>

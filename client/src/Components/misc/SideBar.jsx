@@ -18,7 +18,7 @@ const SideBar = () => {
     <Box className="sideMainContainer" width={"20%"} bgColor={"#0B0F1F"} p={7}>
       <Box>
         <img width={"70%"} src={workzone} alt="fdf" />
-        <CreateProjectModal>
+        {/* <CreateProjectModal> */}
           <Box
             mt={"9"}
             p={"7px"}
@@ -37,7 +37,7 @@ const SideBar = () => {
             <Text size={"lg"}>Project</Text>
             <BsFillCaretRightFill />
           </Box>
-        </CreateProjectModal>
+        {/* </CreateProjectModal> */}
         <Box
           mt={"2"}
           p={"7px"}
@@ -62,7 +62,7 @@ const SideBar = () => {
         </Box>
       {/* user profile */}
       {/* <div style={{ display: "flex", justifyContent: "flex-end" }}> */}
-      <Menu isLazy>
+      <Menu isLazy >
         <MenuButton w={'100%'}>
 
         <Button
@@ -70,12 +70,15 @@ const SideBar = () => {
         borderRadius={"29px"}
         display={"flex"}
         justifyContent={"flex-start"}
+        bgColor={"#0B0F1F"}
         alignContent={"start"}
         w={"80%"}
         h={"60px"}
+        border={'2px solid white'}
+        color={"white"}
       >
-        <Avatar mr={2} size="md" cursor="pointer" name={user.name} />
-        <Text>{user.name}</Text>
+        <Avatar mr={2} size="md" cursor="pointer" name={user?.name} />
+        <Text>{user?.name}</Text>
       </Button>
           {/* <Avatar size="sm" cursor="pointer" name={user.name} src={user.pic} /> */}
         </MenuButton>

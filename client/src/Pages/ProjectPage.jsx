@@ -16,6 +16,7 @@ import { API_LINK } from "../Config/Api";
 import axios from "axios";
 import ProjectTableBody from "../Components/Project/ProjectTableBody";
 import './pages.css'
+import ProjectHeader from "../Components/Project/ProjectHeader";
 
 
 const ProjectPage = () => {
@@ -43,9 +44,9 @@ const ProjectPage = () => {
     fetchProjects();
   }, [user, fetchAgain]);
   return (
-   
-      <Box w={"75%"} margin={"40px auto"}>
-        <TableContainer className="projectTableContainer" width={"100%"}  height={"86vh"} overflowY={'scroll'}>
+      <Box w={"80%"}  borderLeft={"1px solid gray"}>
+        <ProjectHeader/>
+        <TableContainer marginTop={'17px'} className="projectTableContainer" width={"100%"}  height={"86vh"} overflowY={'scroll'} borderTop={'1px solid lightgray'}>
           <Table variant="simple" >
             <Thead>
               <Tr>

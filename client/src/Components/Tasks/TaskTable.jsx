@@ -5,10 +5,13 @@ import { AppContext } from '../../ContextApi/ContextProvider';
 import { API_LINK } from '../../Config/Api';
 import axios from 'axios';
 import TaskTableBody from './TaskTableBody';
+import { useParams } from 'react-router-dom';
 
 const TaskTable = () => {
     const [taskData, setTaskData] = useState([]);
   const { user,selectedProject, fetchAgain } = useContext(AppContext);
+
+  const {id} = useParams()
   
   const fetchTask = async () => {
     try {
@@ -20,7 +23,7 @@ const TaskTable = () => {
 
       const { data } = await axios.get(`${API_LINK}/tasks`, config);
       let filteredData = data.filter((elem)=>{
-        return elem.project._id == selectedProject._id
+        return elem.project._id == id
       })
       console.log("Task Data ===>>>",data);
       console.log("Filtered Data ===>>>",filteredData);
@@ -32,7 +35,7 @@ const TaskTable = () => {
 
   useEffect(()=>{
     fetchTask();
-  },[])
+  },[fetchAgain])
   return (
     <TableContainer width={"100%"}>
           <Table variant="simple">
