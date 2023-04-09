@@ -15,7 +15,7 @@ const ProjectDescriptionHeader = () => {
             {/* <Button mr={'3'} borderRadius={'25px'}><HiOutlineUserGroup/>&nbsp; Team members</Button> */}
             <ProjectTeamMembers/>
             <CreateTaskModal>
-            <Button  variant="solid" _hover={{ bg: "blue.500" }} bg={'#4461D7'} color={'white'} mr={'1'} borderRadius={'25px'}><GrAdd color={'#4461D7'}/>&nbsp; Add Task</Button>
+            <Button  variant="solid" _hover={{ bg: "blue.500" }} bg={'#4461D7'} color={'white'} mr={'5'} borderRadius={'25px'}><GrAdd color={'#4461D7'}/>&nbsp; Add Task</Button>
             </CreateTaskModal>
         </Box>
     </Box>

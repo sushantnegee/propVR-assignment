@@ -19,8 +19,54 @@ const Signup = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
+  const [image,setImage] = useState('')
   const [show, setShow] = useState();
   const toast = useToast();
+
+  const postImage =(img)=>{
+    setLoading(true);
+    console.log('lol')
+    if(img===undefined){
+        toast({
+            title: 'Please Select an Image',
+            status: 'warning',
+            duration: 4000,
+            isClosable: true,
+            position:"bottom"
+          })
+          return;
+    }
+    if(img.type ==="image/jpeg" || img.type === "image/png"){
+        const data = new FormData();
+        data.append("file",img);
+        data.append("upload_preset","doodle-talk");
+        data.append("cloud_name","dygq6pqie");
+        fetch("https://api.cloudinary.com/v1_1/dygq6pqie/image/upload",{
+            method:"post",
+            body:data,
+        })
+        .then((res)=>res.json())
+        .then((data)=>{
+            setImage(data.url.toString());
+
+            console.log(image)
+            setLoading(false);
+        }).catch((err)=>{
+            console.log("error :",err);
+            setLoading(false);
+        })
+    }else{
+        toast({
+            title: 'Please Select an Image',
+            status: 'warning',
+            duration: 4000,
+            isClosable: true,
+            position:"bottom"
+          })
+          setLoading(false);
+          return;
+    }
+}
 
   const submitHandler = async () => {
     if (!email || !name || !password || !confirmPassword) {
@@ -124,6 +170,10 @@ const Signup = () => {
           </InputRightElement>
         </InputGroup>
       </FormControl>
+      <FormControl id="pic">
+        <FormLabel>Upload Your Picture</FormLabel>
+        <Input type={'file'} p={1.5} accept={'image/*'} onChange={(e)=>postImage(e.target.files[0])}/>
+    </FormControl>
       <Button
         className="submitButton"
         style={{ marginTop: "30px" }}

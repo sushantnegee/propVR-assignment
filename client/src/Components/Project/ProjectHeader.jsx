@@ -12,7 +12,7 @@ const ProjectHeader = () => {
             {/* <Button mr={'3'} borderRadius={'25px'}><HiOutlineUserGroup/>&nbsp; Team members</Button> */}
             {/* <ProjectTeamMembers/> */}
             <CreateProjectModal>
-            <Button  variant="solid" _hover={{ bg: "blue.500" }} bg={'#4461D7'} color={'white'} mr={'1'} borderRadius={'25px'} mr="7"><GrAdd color={'#4461D7'}/>&nbsp; Add Project</Button>
+            <Button  variant="solid" _hover={{ bg: "blue.500" }} bg={'#4461D7'} color={'white'} mr={'5'} borderRadius={'25px'}><GrAdd color={'#4461D7'}/>&nbsp; Add Project</Button>
             </CreateProjectModal>
         </Box>
     </Box>
