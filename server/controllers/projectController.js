@@ -3,7 +3,7 @@ const Project = require("../models/projectModel");
 // create project---------------->>
 const createProject = async (req, res) => {
   try {
-    const { name, description, dueDate, owner, team, tasks } = req.body;
+    let { name, description, dueDate, owner, team, tasks } = req.body;
 
     const existingProject = await Project.findOne({ name });
     if (existingProject) {
@@ -11,6 +11,7 @@ const createProject = async (req, res) => {
         .status(400)
         .json({ message: "A project with the same name already exists" });
     }
+    team = JSON.parse(team);
     const project = await Project.create({
       name,
       description,
@@ -21,6 +22,7 @@ const createProject = async (req, res) => {
     });
     return res.status(201).json({ project });
   } catch (error) {
+    console.log("error in create project =>",error.message)
     return res.status(500).json({ message: error.message });
   }
 };
