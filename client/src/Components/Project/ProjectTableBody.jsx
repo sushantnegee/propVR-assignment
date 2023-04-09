@@ -17,7 +17,8 @@ import { AppContext } from "../../ContextApi/ContextProvider";
 
 const ProjectTableBody = ({ data }) => {
   const { name, owner, startDate, dueDate } = data;
-  const {setSelectedProject} = useContext(AppContext)
+  const {setSelectedProject,seletedProject} = useContext(AppContext)
+  console.log("Selected Project =>",setSelectedProject)
   return (
     <Tr>
       <Td>

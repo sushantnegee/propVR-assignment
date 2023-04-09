@@ -90,15 +90,17 @@ const CreateProjectModal = ({ children }) => {
           Authorization: `Bearer ${user.token}`,
         },
       };
-
+      if(!team.includes(user)){
+        setTeam([...team,user]);
+      }
       const { data } = await axios.post(
         `${API_LINK}/projects`,
         {
           name: projectName,
           description: description,
           dueDate: dueDate,
-          team: team,
-          project: selectedProject._id,
+          owner: user._id,
+          team: JSON.stringify(team.map((mem)=>mem._id)),
         },
         config
       );
@@ -112,9 +114,10 @@ const CreateProjectModal = ({ children }) => {
         position: "bottom",
       });
     } catch (error) {
+      console.log(error)
       toast({
         title: "Failed to Create new project!",
-        // description: error.response.data,
+        description: error.message,
         status: "error",
         duration: 5000,
         isClosable: true,
@@ -123,9 +126,10 @@ const CreateProjectModal = ({ children }) => {
     }
   };
 
-  const handleTeam = (userSelected) => {
-    console.log("userSelected =>", userSelected);
-    if (team.includes(userSelected)) {
+console.log(team)
+  const handleTeam = (userToAdd) => {
+    console.log("userToAdd =>", userToAdd);
+    if (team.includes(userToAdd)) {
       toast({
         title: "User already Added!",
         status: "error",
@@ -135,14 +139,14 @@ const CreateProjectModal = ({ children }) => {
       });
       return;
     }
-    setTeam([...team, userSelected]);
+    setTeam([...team, userToAdd]);
   };
 
   const handleDelete=(userToDel)=>{
     console.log("inside delete")
     setTeam(team.filter((mem)=>mem._id!==userToDel._id))
 }
-  console.log("selectedProject ==>", selectedProject);
+  // console.log("selectedProject ==>", selectedProject);
   // console.log(description)
   // console.log("assignee => ",assignee)
   console.log(dueDate);
@@ -201,25 +205,6 @@ const CreateProjectModal = ({ children }) => {
                 }}
               />
             </FormControl>
-            {/* {assignee ? (
-                <Box
-                  mb={"2"}
-                  paddng={"20px"}
-                  w={"100%"}
-                  display="flex"
-                  flexWrap={"wrap"}
-                >
-                  <Text backgroundColor={"skyblue"} fontSize={"m"}>
-                    {assignee.name}
-                  </Text>
-                </Box>
-              ) : (
-                ""
-              )} */}
-            {/* {loading?<Spinner/>:
-            searchResult?.slice(0,4).map((elem)=>{
-              return <UserListItem key={elem._id} user = {elem} handleFunction={()=>handleTask(elem)}/>
-            })} */}
 
             <Box w={"100%"} display="flex" flexWrap={"wrap"}>
               {team.map((user) => (

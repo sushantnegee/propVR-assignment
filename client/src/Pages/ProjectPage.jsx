@@ -1,14 +1,9 @@
 import {
-  Avatar,
   Box,
   Button,
-  Container,
   Table,
-  TableCaption,
   TableContainer,
   Tbody,
-  Td,
-  Tfoot,
   Th,
   Thead,
   Tr,
@@ -20,10 +15,11 @@ import { API_LINK } from "../Config/Api";
 import axios from "axios";
 import ProjectTableBody from "../Components/Project/ProjectTableBody";
 import CreateProjectModal from "../Components/Modals/CreateProjectModal";
+import SideBar from "../Components/misc/SideBar";
 
 const ProjectPage = () => {
-  const [projectData,SetProjectData] = useState([]);
-  const { user,fetchAgain } = useContext(AppContext);
+  const [projectData, SetProjectData] = useState([]);
+  const { user, fetchAgain } = useContext(AppContext);
   const fetchProjects = async () => {
     try {
       const config = {
@@ -43,14 +39,22 @@ const ProjectPage = () => {
 
   useEffect(() => {
     fetchProjects();
-  }, [user,fetchAgain]);
+  }, [user, fetchAgain]);
   return (
     // <Container>
-    <Box w={"90%"} margin={"0 auto"} border="2px solid red">
-      <CreateProjectModal>
+    <Box
+      w={"100%"}
+      display={"flex"}
+      justifyContent={"center"}
+      alignContent={"center"}
+      margin={"0 auto"}
+      // border="2px solid red"
+    >
+      {/* <CreateProjectModal>
       <Button>Create Project</Button>
-      </CreateProjectModal>
-      <Box w={"90%"} margin={"40px auto"}>
+      </CreateProjectModal> */}
+      <SideBar/>
+      <Box w={"75%"} margin={"40px auto"}>
         <TableContainer width={"100%"}>
           <Table variant="simple">
             <Thead>
@@ -66,16 +70,18 @@ const ProjectPage = () => {
               </Tr>
             </Thead>
             <Tbody>
-              {projectData.map((elem,i)=>{
+              {projectData.map((elem, i) => {
                 console.log("elem", elem);
                 console.log("user", user);
                 console.log("elem.owner", elem.owner);
-                if(elem.owner._id && user._id && elem.owner._id==user?._id ||  elem.team.some(obj => obj._id === user?._id)){
-                  return <ProjectTableBody data={elem} key={elem._id}/>
+                if (
+                  (elem.owner._id && user._id && elem.owner._id == user?._id) ||
+                  elem.team.some((obj) => obj._id === user?._id)
+                ) {
+                  return <ProjectTableBody data={elem} key={elem._id} />;
                 }
-              })
-              }
-              </Tbody>
+              })}
+            </Tbody>
           </Table>
         </TableContainer>
       </Box>
