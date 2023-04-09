@@ -1,0 +1,3 @@
+.projectTableContainer::-webkit-scrollbar{
+    display: none;
+}

@@ -4,6 +4,7 @@ import {
   Table,
   TableContainer,
   Tbody,
+  Text,
   Th,
   Thead,
   Tr,
@@ -14,8 +15,8 @@ import { AppContext } from "../ContextApi/ContextProvider";
 import { API_LINK } from "../Config/Api";
 import axios from "axios";
 import ProjectTableBody from "../Components/Project/ProjectTableBody";
-import CreateProjectModal from "../Components/Modals/CreateProjectModal";
-import SideBar from "../Components/misc/SideBar";
+import './pages.css'
+
 
 const ProjectPage = () => {
   const [projectData, SetProjectData] = useState([]);
@@ -44,8 +45,8 @@ const ProjectPage = () => {
   return (
    
       <Box w={"75%"} margin={"40px auto"}>
-        <TableContainer width={"100%"}>
-          <Table variant="simple">
+        <TableContainer className="projectTableContainer" width={"100%"}  height={"86vh"} overflowY={'scroll'}>
+          <Table variant="simple" >
             <Thead>
               <Tr>
                 <Th>
