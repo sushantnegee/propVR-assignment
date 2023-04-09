@@ -20,7 +20,7 @@ const ContextProvider = ({children}) => {
         setUser(userDetails);
     },[loggedIn])
 
-    console.log('user Details ==>',user)
+    // console.log('user Details ==>',user)
   return (
     <AppContext.Provider value={{
         user,

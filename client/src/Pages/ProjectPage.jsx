@@ -30,7 +30,7 @@ const ProjectPage = () => {
       };
 
       const { data } = await axios.get(`${API_LINK}/projects/`, config);
-      console.log(data);
+      // console.log(data);
       SetProjectData(data);
       // console.log("fetched");
     } catch (error) {
@@ -60,9 +60,9 @@ const ProjectPage = () => {
             </Thead>
             <Tbody>
               {projectData.map((elem, i) => {
-                console.log("elem", elem);
-                console.log("user", user);
-                console.log("elem.owner", elem.owner);
+                // console.log("elem", elem);
+                // console.log("user", user);
+                // console.log("elem.owner", elem.owner);
                 if (
                   (elem.owner._id && user._id && elem.owner._id == user?._id) ||
                   elem.team.some((obj) => obj._id === user?._id)

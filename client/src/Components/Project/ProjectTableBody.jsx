@@ -21,13 +21,13 @@ import { Link } from "react-router-dom";
 const ProjectTableBody = ({ data }) => {
   const { name, owner, startDate, dueDate } = data;
   const {setSelectedProject,seletedProject} = useContext(AppContext)
-  console.log("Selected Project =>",setSelectedProject)
+  // console.log("Selected Project =>",setSelectedProject)
   return (
     <Tr>
       <Td>
         <AiOutlineStar size={"1.8rem"} color="gray" />
       </Td>
-      <Td onClick={setSelectedProject(data)} className="HoverUnderline"><Link to={`/projects/${data._id}`}>{name}</Link></Td>
+      <Td onClick={()=>setSelectedProject(data)} className="HoverUnderline"><Link to={`/projects/${data._id}`}>{name}</Link></Td>
       <Td>
         <Avatar
           name={owner.name}
