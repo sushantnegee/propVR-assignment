@@ -82,6 +82,7 @@ const CreateTaskModal = ({ children }) => {
         isClosable: true,
         position: "top",
       });
+      setLoading(false)
       return;
     }
 
@@ -111,18 +112,20 @@ const CreateTaskModal = ({ children }) => {
         status: "success",
         duration: 4000,
         isClosable: true,
-        position: "bottom",
+        position: "top",
       });
+      setPriority('none')
       setLoading(false)
     } catch (error) {
       setLoading(false)
+      setPriority('none')
       toast({
         title: "Failed to Create new Task!",
         description: error.response.data,
         status: "error",
-        duration: 5000,
+        duration: 4000,
         isClosable: true,
-        position: "bottom",
+        position: "top",
       });
     }
   };

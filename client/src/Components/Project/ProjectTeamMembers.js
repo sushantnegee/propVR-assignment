@@ -1,4 +1,5 @@
 import {
+  Avatar,
   Button,
   Image,
   Menu,
@@ -12,7 +13,7 @@ import { AppContext } from "../../ContextApi/ContextProvider";
 
 const ProjectTeamMembers = () => {
   const { selectedProject } = useContext(AppContext);
-  console.log("selected Project ==>",selectedProject)
+  console.log("selected Project ==>", selectedProject);
   return (
     <Menu>
       <MenuButton
@@ -30,12 +31,10 @@ const ProjectTeamMembers = () => {
         {selectedProject?.team.map((mem, i) => {
           return (
             <MenuItem minH="48px">
-              <Image
-                boxSize="1.8rem"
-                borderRadius="full"
-                src={mem.image}
-                alt="Fluffybuns the destroyer"
-                mr="12px"
+              <Avatar
+                name={mem.name}
+                size={"sm"}
+                mr={2}
               />
               <span>{mem.name}</span>
             </MenuItem>

@@ -11,10 +11,11 @@ import {
 import React from "react";
 import Login from "../Components/Authentication/Login";
 import Signup from "../Components/Authentication/Signup";
+import './pages.css'
 
 const HomePage = () => {
   return (
-    <Container maxW={'xl'} centerContent>
+    <Container maxW={'xl'} centerContent className="authContainer">
       <Box
         display={'flex'}
         justifyContent={'center'}

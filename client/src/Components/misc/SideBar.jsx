@@ -1,5 +1,5 @@
 import { Avatar, Box, Button, Image, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Text } from "@chakra-ui/react";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import workzone from "../Images/workzone..png";
 import { RiSpaceShipLine } from "react-icons/ri";
 import { BsFillCaretRightFill } from "react-icons/bs";
@@ -10,10 +10,20 @@ import "./SideBar.css";
 import { useNavigate } from "react-router-dom";
 
 const SideBar = () => {
+  const [buttonFocus,setButtonFocus] = useState('false');
   const { user } = useContext(AppContext);
   const navigate = useNavigate()
   const {loggedIn,setLoggedIn} = useContext(AppContext)
 
+  const handleProject = ()=>{
+    setButtonFocus(true);
+    navigate('/projects')
+  }
+
+  const handleCalendar = ()=>{
+    setButtonFocus(false);
+    navigate('/calendar')
+  }
   const logoutHandler =()=>{
     localStorage.removeItem("userDetails");
     navigate("/");
@@ -29,7 +39,8 @@ const SideBar = () => {
           mt={"9"}
           p={"7px"}
           w={"80%"}
-          border={"2px solid white"}
+          // border={!buttonFocus?"2px solid lightgray":"2px solid #FF22B1"}
+          border={'2px solid lightgray'}
           fontSize={"lg"}
           bgColor={"#0B0F1F"}
           display={"flex"}
@@ -38,18 +49,18 @@ const SideBar = () => {
           color={"white"}
           textAlign={"center"}
           borderRadius={"20px"}
-          onClick={()=>navigate('/projects')}
+          onClick={()=>handleProject()}
           >
             <RiSpaceShipLine className="sideBarMenuIcon" size={"1.7rem"} />
             <Text className="sideBarMenuText" size={"lg"}>Project</Text>
-            <BsFillCaretRightFill className="sideBarMenuIcon"/>
+            <BsFillCaretRightFill color={!buttonFocus?"lightgray":"#4166D6"} className="sideBarMenuIcon"/>
           </Box>
         {/* </CreateProjectModal> */}
         <Box
-          mt={"2"}
+          mt={"3"}
           p={"7px"}
           w={"80%"}
-          border={"2px solid white"}
+          border={'2px solid lightgray'}
           fontSize={"lg"}
           bgColor={"#0B0F1F"}
           display={"flex"}
@@ -58,11 +69,11 @@ const SideBar = () => {
           color={"white"}
           textAlign={"center"}
           borderRadius={"20px"}
-          onClick={()=>navigate('/calendar')}
+          onClick={()=>handleCalendar()}
         >
           <BiCalendar className="sideBarMenuIcon" size={"1.7rem"} />
           <Text className="sideBarMenuText" size={"lg"}>Calendar</Text>
-          <BsFillCaretRightFill className="sideBarMenuIcon" />
+          <BsFillCaretRightFill color={buttonFocus?"lightgray":"#4166D6"} className="sideBarMenuIcon" />
         </Box>
       </Box>
       <Box h={'58vh'}>

@@ -79,8 +79,9 @@ const CreateProjectModal = ({ children }) => {
         status: "error",
         duration: 4000,
         isClosable: true,
-        position: "top",
+        position: "top-right",
       });
+      setLoading(false);
       return;
     }
 
@@ -111,7 +112,7 @@ const CreateProjectModal = ({ children }) => {
         status: "success",
         duration: 4000,
         isClosable: true,
-        position: "bottom",
+        position: "top-right",
       });
       setLoading(false);
     } catch (error) {
@@ -123,7 +124,7 @@ const CreateProjectModal = ({ children }) => {
         status: "error",
         duration: 5000,
         isClosable: true,
-        position: "bottom",
+        position: "top-right",
       });
     }
   };

@@ -29,7 +29,7 @@ const Signup = () => {
         status: "warning",
         duration: 4000,
         isClosable: true,
-        position: "bottom",
+        position: "top-right",
       });
       return;
     }
@@ -40,7 +40,7 @@ const Signup = () => {
         status: "warning",
         duration: 4000,
         isClosable: true,
-        position: "bottom",
+        position: "top-right",
       });
       setLoading(false);
       return;
@@ -69,7 +69,7 @@ const Signup = () => {
       toast({
         title: "Error Occured",
         description: error.response.data.message,
-        status: "success",
+        status: "error",
         duration: 4000,
         isClosable: true,
         position: "bottom",
