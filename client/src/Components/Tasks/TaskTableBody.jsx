@@ -27,23 +27,7 @@ const TaskTableBody = ({data}) => {
       </Td>
       <Td>{status}</Td>
       <Td>{dueDate.substring(0, 10)}</Td>
-      <Td  p={'1'}><Box textAlign={'center'} borderRadius={'5px'} width={'100%'} h={'40px'} bg={priority=='none'?"#E1E6EE":priority=="low"?"#4ECD97":priority=="medium"?"#FFC63C":"#E12D42"} color={priority=='none'?"black":"white"}>{priority}</Box></Td>
-      {/* <Td margin={"auto"}>
-        <Menu>
-          <MenuButton as={Button} rightIcon={<GrFormDown />}>
-            <BsThreeDots size={"1.5rem"} />
-          </MenuButton>
-          <MenuList>
-            <EditProjectModal>
-            <MenuItem onClick={()=>setSelectedProject(data)}>Edit Project</MenuItem>
-            </EditProjectModal>
-            <CreateTaskModal>
-            <MenuItem onClick={()=>setSelectedProject(data)}>Create Task</MenuItem>
-            </CreateTaskModal>
-            <MenuItem>Add User</MenuItem>
-          </MenuList>
-        </Menu>
-      </Td> */}
+      <Td  p={'1'}><Box display={'flex'} justifyContent={'center'} alignItems={'center'} textAlign={'center'} borderRadius={'5px'} width={'100%'} h={'40px'} bg={priority=='none'?"#E1E6EE":priority=="low"?"#4ECD97":priority=="medium"?"#FFC63C":"#E12D42"} color={priority=='none'?"black":"white"}>{priority}</Box></Td>
     </Tr>
   )
 }

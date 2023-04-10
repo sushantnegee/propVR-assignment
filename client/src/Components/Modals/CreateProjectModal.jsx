@@ -28,12 +28,10 @@ const CreateProjectModal = ({ children }) => {
   const [projectName, setProjectName] = useState();
   const [description, setDescription] = useState();
   const [dueDate, setDueData] = useState();
-  const [startDate, setStartDate] = useState();
   const [status, setStatus] = useState();
-  const [loading, setLoading] = useState(false);
   const [team, setTeam] = useState([]);
   const [searchResult, setSearchResult] = useState();
-  const [search, setSearch] = useState();
+  const [loading,setLoading] = useState(false);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
@@ -57,10 +55,11 @@ const CreateProjectModal = ({ children }) => {
         `${API_LINK}/user?search=${query}`,
         config
       );
-      console.log(data);
-      setLoading(false);
+      // console.log(data);
       setSearchResult(data);
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
       toast({
         title: "Error Occured!",
         description: error.message,
@@ -73,6 +72,7 @@ const CreateProjectModal = ({ children }) => {
   };
 
   const handleSubmit = async () => {
+    setLoading(true);
     if (!projectName || !description || !dueDate) {
       toast({
         title: "Please Fill all Fields",
@@ -113,7 +113,9 @@ const CreateProjectModal = ({ children }) => {
         isClosable: true,
         position: "bottom",
       });
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
       console.log(error)
       toast({
         title: "Failed to Create new project!",
@@ -231,7 +233,7 @@ console.log(team)
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="blue" onClick={handleSubmit}>
+            <Button isLoading={loading} colorScheme="blue" onClick={handleSubmit}>
               Create Project
             </Button>
           </ModalFooter>
