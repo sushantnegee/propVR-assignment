@@ -1,9 +1,7 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import {
   SevenColGrid,
-  Wrapper,
   HeadDays,
-  DateControls,
   StyledEvent,
   SeeMore,
   PortalWrapper
@@ -17,8 +15,6 @@ import {
   getSortedDays,
   nextMonth,
   prevMonth,
-  range,
-  sortDays
 } from "../../Components/Calendar/Utils";
 import {MdOutlineArrowBackIos, MdOutlineArrowForwardIos} from 'react-icons/md'
 
@@ -104,19 +100,9 @@ const Calendar = () => {
     );
   };
 
-  const handleOnClickEvent = (event) => {
-    setShowPortal(true);
-    setPortalData(event);
-  };
 
   const handlePotalClose = () => setShowPortal(false);
 
-  const handleDelete = () => {
-    setEvents((prevEvents) =>
-      prevEvents.filter((ev) => ev.title !== portalData.title)
-    );
-    handlePotalClose();
-  };
 
   return (
     <Box className="calendar-wrapper" w={'80%'} h={"99vh"} borderRadius={'5px'} border={'1px solid lightgray'}>
@@ -150,16 +136,6 @@ const Calendar = () => {
             }
             onDragOver={(e) => e.preventDefault()}
             onDragEnd={drop}
-            onClick={(e) =>
-              addEvent(
-                new Date(
-                  currentDate.getFullYear(),
-                  currentDate.getMonth(),
-                  day
-                ),
-                e
-              )
-            }
           >
             <span
               className={`nonDRAG ${
@@ -190,7 +166,6 @@ const Calendar = () => {
                   ) && (
                     <StyledEvent
                       onDragStart={(e) => drag(index, e)}
-                      onClick={() => handleOnClickEvent(ev)}
                       draggable
                       className="StyledEvent"
                       id={`${ev.color} ${ev.title}`}
@@ -205,13 +180,7 @@ const Calendar = () => {
           </div>
         ))}
       </SevenColGrid>
-      {showPortal && (
-        <Portal
-          {...portalData}
-          handleDelete={handleDelete}
-          handlePotalClose={handlePotalClose}
-        />
-      )}
+      
     </Box>
   );
 };
@@ -225,7 +194,6 @@ const EventWrapper = ({ children }) => {
           <SeeMore
             onClick={(e) => {
               e.stopPropagation();
-              console.log("clicked p");
             }}
           >
             see more...
@@ -233,17 +201,6 @@ const EventWrapper = ({ children }) => {
         )}
       </>
     );
-};
-
-const Portal = ({ title, date, handleDelete, handlePotalClose }) => {
-  return (
-    <PortalWrapper>
-      <h2>{title}</h2>
-      <p>{date.toDateString()}</p>
-      <ion-icon onClick={handleDelete} name="trash-outline"></ion-icon>
-      <ion-icon onClick={handlePotalClose} name="close-outline"></ion-icon>
-    </PortalWrapper>
-  );
 };
 
 

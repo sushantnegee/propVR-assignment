@@ -6,11 +6,11 @@ import ProjectTeamMembers from '../Project/ProjectTeamMembers'
 import CreateTaskModal from '../Modals/CreateTaskModal'
 import { AppContext } from '../../ContextApi/ContextProvider'
 
-const ProjectDescriptionHeader = () => {
-  const {selectedProject} = useContext(AppContext)
+const ProjectDescriptionHeader = ({selectedProject}) => {
+  // const {selectedProject} = useContext(AppContext)
   return (
     <Box display={'flex'} justifyContent={'space-between'} alignItems={'center'}  p={2} mb={'2'}>
-        <Text ml={4} fontWeight={'600'} fontSize="2xl">{selectedProject.name.toUpperCase()}</Text>
+        <Text ml={4} fontWeight={'600'} fontSize="2xl">{selectedProject?.name.toUpperCase()}</Text>
         <Box>
             {/* <Button mr={'3'} borderRadius={'25px'}><HiOutlineUserGroup/>&nbsp; Team members</Button> */}
             <ProjectTeamMembers/>

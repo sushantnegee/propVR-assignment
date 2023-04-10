@@ -17,10 +17,10 @@ import axios from "axios";
 import { API_LINK } from "../Config/Api";
 
 const ProjectDescription = () => {
-  
+  const {selectedProject} = useContext(AppContext);
   return (
     <Box w={"80%"}  borderLeft={"1px solid lightgray"}>
-      <ProjectDescriptionHeader />
+      <ProjectDescriptionHeader selectedProject = {selectedProject}/>
 
       <Accordion defaultIndex={[0]} p={2} allowToggle>
         <AccordionItem>
