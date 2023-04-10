@@ -1,4 +1,4 @@
-import { Avatar, Box, Menu, MenuButton, MenuItem, MenuList, Td, Tr } from '@chakra-ui/react'
+import { Avatar, Box, Menu, MenuButton, MenuItem, MenuList, Td, Tooltip, Tr } from '@chakra-ui/react'
 import React, { useContext } from 'react'
 import { AiOutlineStar } from 'react-icons/ai'
 import { BsThreeDots } from 'react-icons/bs'
@@ -17,11 +17,13 @@ const TaskTableBody = ({data}) => {
       </Td>
       <Td  className="HoverUnderline"><Link to={`/projects/${data._id}`}>{title}</Link></Td>
       <Td>
+      <Tooltip hasArrow label={assignedTo.name} placement='bottom'  bg='gray.300' color={'black'}>
         <Avatar
           name={assignedTo.name}
           size={"sm"}
           //   src={'https://cdn-icons-png.flaticon.com/512/3135/3135715.png'}
         />
+        </Tooltip>
       </Td>
       <Td>{status}</Td>
       <Td>{dueDate.substring(0, 10)}</Td>

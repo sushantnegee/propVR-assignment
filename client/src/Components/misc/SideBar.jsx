@@ -15,27 +15,28 @@ const SideBar = () => {
 
   }
   return (
-    <Box className="sideMainContainer" width={"20%"} bgColor={"#0B0F1F"} p={7}>
+    <Box className="sideMainContainer"  width={"45vh"} bgColor={"#0B0F1F"} p={7} >
       <Box>
-        <img width={"70%"} src={workzone} alt="fdf" />
+        <img className="sideBarLogo" width={"70%"} src={workzone} alt="fdf" />
         {/* <CreateProjectModal> */}
           <Box
-            mt={"9"}
-            p={"7px"}
-            w={"80%"}
-            border={"2px solid white"}
-            fontSize={"lg"}
-            bgColor={"#0B0F1F"}
-            display={"flex"}
-            justifyContent={"space-between"}
-            alignItems={"center"}
-            color={"white"}
-            textAlign={"center"}
-            borderRadius={"20px"}
+          className="SideBarProjectTab"
+          mt={"9"}
+          p={"7px"}
+          w={"80%"}
+          border={"2px solid white"}
+          fontSize={"lg"}
+          bgColor={"#0B0F1F"}
+          display={"flex"}
+          justifyContent={"space-between"}
+          alignItems={"center"}
+          color={"white"}
+          textAlign={"center"}
+          borderRadius={"20px"}
           >
-            <RiSpaceShipLine size={"1.7rem"} />
-            <Text size={"lg"}>Project</Text>
-            <BsFillCaretRightFill />
+            <RiSpaceShipLine className="sideBarMenuIcon" size={"1.7rem"} />
+            <Text className="sideBarMenuText" size={"lg"}>Project</Text>
+            <BsFillCaretRightFill className="sideBarMenuIcon"/>
           </Box>
         {/* </CreateProjectModal> */}
         <Box
@@ -52,9 +53,9 @@ const SideBar = () => {
           textAlign={"center"}
           borderRadius={"20px"}
         >
-          <BiCalendar size={"1.7rem"} />
-          <Text size={"lg"}>Calendar</Text>
-          <BsFillCaretRightFill />
+          <BiCalendar className="sideBarMenuIcon" size={"1.7rem"} />
+          <Text className="sideBarMenuText" size={"lg"}>Calendar</Text>
+          <BsFillCaretRightFill className="sideBarMenuIcon" />
         </Box>
       </Box>
       <Box h={'58vh'}>
@@ -82,7 +83,7 @@ const SideBar = () => {
       </Button>
           {/* <Avatar size="sm" cursor="pointer" name={user.name} src={user.pic} /> */}
         </MenuButton>
-        <MenuList>
+        <MenuList placement='right-end'>
           {/* <ProfileModal user={user}> */}
             <MenuItem>My Profile</MenuItem>{" "}
           {/* </ProfileModal> */}
