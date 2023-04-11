@@ -51,7 +51,7 @@ const Calendar = () => {
       const clickedUser = selectedUser || user;
       const filteredData = data.filter((elem)=>
          elem.assignedTo._id == clickedUser._id).map((elem)=>{
-          return {date: new Date(elem.dueDate.substring(0,10)),title:elem.title,color:getDarkColor}
+          return {date: new Date(elem.dueDate.substring(0,10)),title:elem.title,color:getDarkColor,description:elem.description}
         })
       setEvents(filteredData);
     } catch (error) {
@@ -112,8 +112,8 @@ const Calendar = () => {
         {getMonthYear(currentDate)} 
         <MdOutlineArrowForwardIos cursor={'pointer'} onClick={() => nextMonth(currentDate, setCurrentDate)} size={'1.5rem'}/>
         </Box>
-         <Box display={'flex'} justifyContent={'center'} alignItems={'center'} gap={'4'} border={'2px'} pr={4}>
-          <Text>hfdjfhdjks</Text>
+         <Box display={'flex'} justifyContent={'center'} alignItems={'center'} gap={'6'}>
+          <Text  width={'300px'} color={''} fontWeight={500} fontSize={'1.2rem'}> Calendar of <span style={{color:"#3182CE"}}>{`${selectedUser?.name || (user?.name+" (you)") }`}</span></Text>
          <SideDrawer setSelectedUser = {setSelectedUser}/>
          </Box>
       </Box>
@@ -178,7 +178,8 @@ const Calendar = () => {
                       key={ev.title}
                       bgColor={ev.color}
                     >
-                      {ev.title}
+                      Title :{ev.title} <br/>
+                      {ev.description ? ev.description:""}
                     </StyledEvent>
                   )
               )}

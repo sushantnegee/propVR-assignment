@@ -23,7 +23,7 @@ const registerUser = async (req, res) => {
 
   if (newUser) {
     const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET, {
-      expiresIn: "1h",
+      expiresIn: "1d",
     });
     res.json({
       _id: newUser._id,
@@ -54,7 +54,7 @@ try {
         .json({message:'Invalid Credentials'})
     }
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-        expiresIn: "1h",
+        expiresIn: "1d",
       });
       // console.log(token) 
       res.status(201).json({
