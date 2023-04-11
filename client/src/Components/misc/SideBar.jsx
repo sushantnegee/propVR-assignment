@@ -19,13 +19,7 @@ const SideBar = () => {
   const handleProject = ()=>{
     setButtonFocus(true);
     navigate('/projects')
-    toast({
-      title: "Logout Successfuly",
-      status: "success",
-      duration: 3000,
-      isClosable: true,
-      position: "bottom",
-    });
+    
   }
 
   const handleCalendar = ()=>{
@@ -35,6 +29,13 @@ const SideBar = () => {
   const logoutHandler =()=>{
     localStorage.removeItem("userDetails");
     navigate("/");
+    toast({
+      title: "Logout Successfully",
+      status: "success",
+      duration: 3000,
+      isClosable: true,
+      position: "bottom",
+    });
     setLoggedIn(false);
 
   }
