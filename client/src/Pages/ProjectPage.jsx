@@ -67,7 +67,7 @@ const ProjectPage = () => {
         :projectData.length<=0?<Box  width={'100%'} height={'86vh'} borderTop={'1px solid lightgray'}>
           <img className="noProjectImage" src="https://i.pinimg.com/originals/dd/59/ca/dd59cabdd357be5659fbac290414bb6a.jpg" alt="no project"/>
           </Box>:
-        <TableContainer marginTop={'17px'} pl={10} pr={6} className="projectTableContainer" width={"100%"}  height={"86vh"} overflowY={'scroll'} borderTop={'1px solid lightgray'}>
+        <TableContainer marginTop={'17px'} pl={10} pr={6} className="hideScroll" width={"100%"}  height={"86vh"} overflowY={'scroll'} borderTop={'1px solid lightgray'}>
           <Table variant="simple" >
             <Thead>
               <Tr>

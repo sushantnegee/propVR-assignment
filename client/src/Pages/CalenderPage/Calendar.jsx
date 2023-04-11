@@ -18,11 +18,12 @@ import {
 } from "../../Components/Calendar/Utils";
 import {MdOutlineArrowBackIos, MdOutlineArrowForwardIos} from 'react-icons/md'
 
-import {Box, Container} from '@chakra-ui/react'
+import {Box, Container, Text} from '@chakra-ui/react'
 import './Calendar.css'
 import { AppContext } from "../../ContextApi/ContextProvider";
 import axios from "axios";
 import { API_LINK } from "../../Config/Api";
+import SideDrawer from "../../Components/misc/SideDrawer";
 
 const Calendar = () => {
   const [currentDate, setCurrentDate] = useState(new Date(2023, 3, 1));
@@ -32,6 +33,7 @@ const Calendar = () => {
   const [showPortal, setShowPortal] = useState(false);
   const [portalData, setPortalData] = useState({});
   const [taskData,setTaskData] = useState([])
+  const [selectedUser,setSelectedUser] = useState();
 
   const {user} = useContext(AppContext);
 
@@ -46,12 +48,10 @@ const Calendar = () => {
 
       const { data } = await axios.get(`${API_LINK}/tasks/`, config);
       // console.log(data);
+      const clickedUser = selectedUser || user;
       const filteredData = data.filter((elem)=>
-         elem.assignedTo._id == user._id).map((elem)=>{
-          // console.log(elem)
-          // const date = elem.dueDate.substring(0, 10).split('-');
+         elem.assignedTo._id == clickedUser._id).map((elem)=>{
           return {date: new Date(elem.dueDate.substring(0,10)),title:elem.title,color:getDarkColor}
-          // return {date: new Date(date[0],date[1],date[2]),title:elem.title,color:getDarkColor}
         })
       setEvents(filteredData);
     } catch (error) {
@@ -61,7 +61,7 @@ const Calendar = () => {
   console.log(taskData)
   useEffect(()=>{
     fetchTasks()
-  },[])
+  },[selectedUser])
 
   const addEvent = (date, event) => {
     if (!event.target.classList.contains("StyledEvent")) {
@@ -106,10 +106,16 @@ const Calendar = () => {
 
   return (
     <Box className="calendar-wrapper" w={'80%'} h={"99vh"} borderRadius={'5px'} border={'1px solid lightgray'}>
-      <Box w={'100%'} display={'flex'} justifyContent={'space-around'} p={'10px 0'} alignContent={'center'}>
-        <MdOutlineArrowBackIos onClick={() => prevMonth(currentDate, setCurrentDate)} size={'1.5rem'}/>
+      <Box w={'100%'} display={'flex'} justifyContent={'space-between'} p={'10px 0'} alignContent={'center'}>
+        <Box display={"flex"} justifyContent={'space-around'} alignItems={'center'} pl="4" w={'30%'}>
+        <MdOutlineArrowBackIos cursor={'pointer'} onClick={() => prevMonth(currentDate, setCurrentDate)} size={'1.5rem'}/>
         {getMonthYear(currentDate)} 
-        <MdOutlineArrowForwardIos onClick={() => nextMonth(currentDate, setCurrentDate)} size={'1.5rem'}/>
+        <MdOutlineArrowForwardIos cursor={'pointer'} onClick={() => nextMonth(currentDate, setCurrentDate)} size={'1.5rem'}/>
+        </Box>
+         <Box display={'flex'} justifyContent={'center'} alignItems={'center'} gap={'4'} border={'2px'} pr={4}>
+          <Text>hfdjfhdjks</Text>
+         <SideDrawer setSelectedUser = {setSelectedUser}/>
+         </Box>
       </Box>
       <SevenColGrid>
         {DAYS.map((day) => (
