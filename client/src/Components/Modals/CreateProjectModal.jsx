@@ -25,19 +25,18 @@ import UserBadgeItem from "../misc/UserBadgeItem";
 // import UserListItem from "../misc/UserListItem";
 
 const CreateProjectModal = ({ children }) => {
+  const { user, setFetchAgain, fetchAgain, selectedProject } =useContext(AppContext);
   const [projectName, setProjectName] = useState();
   const [description, setDescription] = useState();
   const [dueDate, setDueData] = useState();
   const [status, setStatus] = useState();
-  const [team, setTeam] = useState([]);
+  const [team, setTeam] = useState([user]);
   const [searchResult, setSearchResult] = useState();
   const [loading,setLoading] = useState(false);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
 
-  const { user, setFetchAgain, fetchAgain, selectedProject } =
-    useContext(AppContext);
 
   const handleSearch = async (query) => {
     if (!query) {
@@ -86,14 +85,13 @@ const CreateProjectModal = ({ children }) => {
     }
 
     try {
+      
       const config = {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
       };
-      if(!team.includes(user)){
-        setTeam([...team,user]);
-      }
+        
       const { data } = await axios.post(
         `${API_LINK}/projects`,
         {
@@ -142,6 +140,7 @@ console.log(team)
       });
       return;
     }
+    
     setTeam([...team, userToAdd]);
   };
 
@@ -222,6 +221,7 @@ console.log(team)
               <Spinner />
             ) : (
               searchResult?.slice(0, 4).map((elem) => {
+                if(elem._id!==user._id)
                 return (
                   <UserListItem
                     key={elem._id}
