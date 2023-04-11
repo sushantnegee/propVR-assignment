@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Image, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Text } from "@chakra-ui/react";
+import { Avatar, Box, Button, Image, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Text, useToast } from "@chakra-ui/react";
 import React, { useContext, useState } from "react";
 import workzone from "../Images/workzone..png";
 import { RiSpaceShipLine } from "react-icons/ri";
@@ -14,10 +14,18 @@ const SideBar = () => {
   const { user } = useContext(AppContext);
   const navigate = useNavigate()
   const {loggedIn,setLoggedIn} = useContext(AppContext)
+  const toast = useToast();
 
   const handleProject = ()=>{
     setButtonFocus(true);
     navigate('/projects')
+    toast({
+      title: "Logout Successfuly",
+      status: "success",
+      duration: 3000,
+      isClosable: true,
+      position: "bottom",
+    });
   }
 
   const handleCalendar = ()=>{
@@ -28,6 +36,7 @@ const SideBar = () => {
     localStorage.removeItem("userDetails");
     navigate("/");
     setLoggedIn(false);
+
   }
   return (
     <Box className="sideMainContainer"  width={'20%'} bgColor={"#0B0F1F"} p={7} >
