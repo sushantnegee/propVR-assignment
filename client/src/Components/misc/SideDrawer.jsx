@@ -56,9 +56,23 @@ const SideDrawer = ({setSelectedUser}) => {
           });
     }
   }
-//   const handleChange =(user)=>{
-//     setSearch(user);
-//   }
+  function debounce(func,delay){
+  // let debounce = function(func,delay){
+    let timeoutId;
+    return function(){
+      // return (...args)=>{
+      const context = this;
+      const args = arguments;
+      console.log("arguments==>", args)
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(()=>{
+        func.apply(context,args);
+      },delay)
+    }
+  }
+
+const debounceFunction = debounce(handleSearch,400);
+
   const clickHandleFunction = (user)=>{
     setSelectedUser(user);
     onClose();
@@ -86,7 +100,7 @@ const SideDrawer = ({setSelectedUser}) => {
           <DrawerHeader>Search User</DrawerHeader>
 
           <DrawerBody>
-            <Input placeholder="Type here..." onChange={(e)=>handleSearch(e.target.value)}/>
+            <Input placeholder="Type here..." onChange={(e)=>debounceFunction(e.target.value)}/>
             {loading?<Spinner/>:<Box mt={4}>
             {searchResult?.map((user)=>{
                return <UserListItem user={user} handleFunction={()=>clickHandleFunction(user)} />
